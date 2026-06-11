@@ -239,7 +239,7 @@
       <div class="phone">
         <div class="notch"></div>
         <div class="screen">
-          <video id="phoneVid" class="screen-vid" autoplay muted playsinline poster="phone1.jpg"></video>
+          <video id="phoneVid" class="screen-vid" muted playsinline preload="metadata" poster="phone1.jpg"></video>
         </div>
       </div>
     </div>
@@ -305,12 +305,12 @@
       <p>Mix it up tooth after tooth. Each animation gives the Tooth Fairy her own little personality.</p>
     </div>
     <div class="grid6">
-      <div class="acard" style="background:linear-gradient(160deg,#ff9ec9,#ff5a9e)"><video class="acard-vid" autoplay muted loop playsinline poster="anim1.jpg"><source src="anim1.mp4" type="video/mp4"></video><span class="label">Classic Flutter</span></div>
-      <div class="acard" style="background:linear-gradient(160deg,#b8a6f0,#7c63d6)"><video class="acard-vid" autoplay muted loop playsinline poster="anim2.jpg"><source src="anim2.mp4" type="video/mp4"></video><span class="label">Fairy Dust</span></div>
-      <div class="acard" style="background:linear-gradient(160deg,#8fd9ff,#4a90e2)"><video class="acard-vid" autoplay muted loop playsinline poster="anim3.jpg"><source src="anim3.mp4" type="video/mp4"></video><span class="label">Moonlight Glide</span></div>
-      <div class="acard" style="background:linear-gradient(160deg,#a8e6d4,#3aa98a)"><video class="acard-vid" autoplay muted loop playsinline poster="anim4.jpg"><source src="anim4.mp4" type="video/mp4"></video><span class="label">Spin &amp; Sparkle</span></div>
-      <div class="acard" style="background:linear-gradient(160deg,#ffd86a,#ff9f43)"><video class="acard-vid" autoplay muted loop playsinline poster="anim5.jpg"><source src="anim5.mp4" type="video/mp4"></video><span class="label">Wand Wave</span></div>
-      <div class="acard" style="background:linear-gradient(160deg,#ffb7d5,#b8a6f0)"><video class="acard-vid" autoplay muted loop playsinline poster="anim6.jpg"><source src="anim6.mp4" type="video/mp4"></video><span class="label">Star Shower</span></div>
+      <div class="acard" style="background:linear-gradient(160deg,#ff9ec9,#ff5a9e)"><video class="acard-vid" muted loop playsinline preload="none" poster="anim1.jpg"><source src="anim1.mp4" type="video/mp4"></video><span class="label">Classic Flutter</span></div>
+      <div class="acard" style="background:linear-gradient(160deg,#b8a6f0,#7c63d6)"><video class="acard-vid" muted loop playsinline preload="none" poster="anim2.jpg"><source src="anim2.mp4" type="video/mp4"></video><span class="label">Fairy Dust</span></div>
+      <div class="acard" style="background:linear-gradient(160deg,#8fd9ff,#4a90e2)"><video class="acard-vid" muted loop playsinline preload="none" poster="anim3.jpg"><source src="anim3.mp4" type="video/mp4"></video><span class="label">Moonlight Glide</span></div>
+      <div class="acard" style="background:linear-gradient(160deg,#a8e6d4,#3aa98a)"><video class="acard-vid" muted loop playsinline preload="none" poster="anim4.jpg"><source src="anim4.mp4" type="video/mp4"></video><span class="label">Spin &amp; Sparkle</span></div>
+      <div class="acard" style="background:linear-gradient(160deg,#ffd86a,#ff9f43)"><video class="acard-vid" muted loop playsinline preload="none" poster="anim5.jpg"><source src="anim5.mp4" type="video/mp4"></video><span class="label">Wand Wave</span></div>
+      <div class="acard" style="background:linear-gradient(160deg,#ffb7d5,#b8a6f0)"><video class="acard-vid" muted loop playsinline preload="none" poster="anim6.jpg"><source src="anim6.mp4" type="video/mp4"></video><span class="label">Star Shower</span></div>
     </div>
   </div>
 </section>
@@ -374,14 +374,10 @@
 
 <script>
 (function(){
-  var v = document.getElementById('phoneVid');
-  if(!v) return;
-  var clips = ['phone1.mp4','phone2.mp4'], i = 0;
-  function play(){ v.src = clips[i]; var p = v.play(); if(p&&p.catch) p.catch(function(){}); }
-  v.addEventListener('ended', function(){ i = (i+1) % clips.length; play(); });
-  play();
-})();
-</script>
-</body>
-</html>
-                              
+  var phone = document.getElementById('phoneVid');
+  if(phone){
+    var clips = ['phone1.mp4','phone2.mp4'], i = 0;
+    phone.src = clips[0];
+    phone.addEventListener('ended', function(){ i = (i+1) % clips.length; phone.src = clips[i]; var p = phone.play(); if(p&&p.catch) p.catch(function(){}); });
+  }
+  // Only
